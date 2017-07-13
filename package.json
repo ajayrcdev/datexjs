@@ -1,0 +1,28 @@
+{
+  "name": "datexjs",
+  "version": "1.0.0",
+  "description": "holidays to long weekend conversion util",
+  "main": "longWeekend.js",
+  "scripts": {
+    "test": "tape *spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajayrcdev/datexjs.git"
+  },
+  "keywords": [
+    "holidays",
+    "long",
+    "weekend",
+    "longweekend"
+  ],
+  "author": "ajayrcdev@gmail.com",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/ajayrcdev/datexjs/issues"
+  },
+  "homepage": "https://github.com/ajayrcdev/datexjs#readme",
+  "devDependencies": {
+    "tape": "^4.7.0"
+  }
+}
