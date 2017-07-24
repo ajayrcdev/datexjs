@@ -2,7 +2,6 @@ let test = require('tape');
 
 let longWeekendCalculator = require('./longWeekend');
 
-
     /* expect to get inputData of Holidays in following format
        inputData = [
            {
@@ -63,11 +62,52 @@ let longWeekendCalculator = require('./longWeekend');
             ]
     */
 
-test('basic arithmetic', function (t) {
-console.log(longWeekendCalculator(null, null));
+let inputData = [
+    new Date('2018-01-01') // monday  
+]
 
-    t.equal(2 + 3, 5);
-    t.equal(7 * 8 + 9, 65);
+configs = {
+    longWeekendStreak : 1, // number of days to be trarversed in left and right direction to check the long weekend combination
+    weekends: 'Saturday,Sunday'   // days of weekend in that country/calendar
+}
+
+test('long weekend with sat, sunday, monday off and streak=1', (t)=> {
+
+    let combinations = longWeekendCalculator(inputData, configs);
+
+    console.log('combinations = \n', combinations);
+    
+    t.end();
+});
+
+test('long weekend with sat,sundays, tuesday off and streak=2', (t)=> {
+
+    inputData = [
+        new Date('2018-01-02'), // tues
+    ];
+    
+    configs.longWeekendStreak = 2; // number of days to be trarversed in left and right direction to check the long weekend combination
+
+    let combinations = longWeekendCalculator(inputData, configs);
+
+    console.log('combinations = \n', combinations);
+
+    t.end();
+});
+
+test('long weekend with sat,sundays, tuesday, thursday and next tuesday off and streak=2', (t)=> {
+
+    inputData = [
+        new Date('2018-01-02'), // tues
+        new Date('2018-01-04'), // thurs   
+        new Date('2018-01-09') // next tues
+    ];
+    
+    configs.longWeekendStreak = 2; // number of days to be trarversed in left and right direction to check the long weekend combination
+
+    let combinations = longWeekendCalculator(inputData, configs);
+    
+    console.log('combinations = \n', combinations);
 
     t.end();
 });
