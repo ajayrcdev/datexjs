@@ -36,7 +36,27 @@ longWeekendCalculator = function (holidays, configs){
         processDate(holiday, holidays, configs);
     });
 
-    return allCombinations.sort(dateSortingAsc);
+    return addMissingDays(allCombinations.sort(dateSortingAsc));
+}
+
+function addMissingDays(allCombinations) {       
+    let allDays = [];
+
+    allCombinations.map( ( holiday, indx ) => {
+        allDays.push(holiday);
+        let nextDay = new Date( holiday.getTime() + 1*dayMs );
+        
+        // if nextDay is not in holidays and not greater than last holiday, add in list as 'leave'
+        let isHoliday = allCombinations.map(Number).indexOf(+nextDay);
+        let isLastOfHoliday = (allCombinations.length - 1) - indx; // we are at last date
+
+        if ( isHoliday < 0 && isLastOfHoliday ) {           
+            allDays.push(nextDay);
+        };
+
+    });
+
+    return allDays;
 }
 
 function processDate(candidateDate, holidays, configs) {
